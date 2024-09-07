@@ -25,7 +25,7 @@ function Atualizar() {
   const { id } = useParams<{ id: string }>();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState<number | string>(0);
   const [isAvailable, setIsAvailable] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -34,7 +34,7 @@ function Atualizar() {
   useEffect(() => {
     const fetchArtCard = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/art-cards/${id}`);
+        const response = await fetch(`http://localhost:3000/art-cards/${Number(id)}`);
         if (!response.ok) {
           throw new Error('Erro ao buscar o card');
         }
@@ -44,7 +44,7 @@ function Atualizar() {
         setPrice(data.price);
         setIsAvailable(data.isAvailable);
       } catch (err) {
-        //setError(err.message);
+        setError('Erro ao atualizar card de arte');
       } finally {
         setLoading(false);
       }
@@ -59,12 +59,12 @@ function Atualizar() {
     const updatedArtCard = {
       title,
       description,
-      price,
+      price: Number(price),
       isAvailable,
     };
 
     try {
-      const response = await fetch(`http://localhost:3000/art-cards/${id}`, {
+      const response = await fetch(`http://localhost:3000/art-cards/${Number(id)}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -76,9 +76,9 @@ function Atualizar() {
         throw new Error('Erro ao atualizar o card');
       }
 
-      navigate('/'); 
+      navigate('/');
     } catch (err) {
-      //setError(err.message);
+      setError(error);
     }
   };
 
@@ -112,7 +112,7 @@ function Atualizar() {
           type="number"
           placeholder="Preço"
           value={price}
-          onChange={(e) => setPrice(parseFloat(e.target.value))}
+          onChange={(e) => setPrice(e.target.value)}
           required
         />
         <Input
