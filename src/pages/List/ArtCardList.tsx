@@ -15,7 +15,7 @@ const ArtCardList: React.FC = () => {
   const [artCards, setArtCards] = useState<ArtCard[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:3000/art-cards')
@@ -69,28 +69,23 @@ const ArtCardList: React.FC = () => {
   return (
     <div>
       <h1>Arte Di Maria</h1>
-      <ul className='card-container'>
+      <div className={styles.cardContainer}>
         {artCards.map(card => (
-          <li key={card.id} className={styles.card}>
+          <div key={card.id} className={styles.card}>
             <h2>{card.title}</h2>
             <p>{card.description}</p>
-            <small>{new Date(card.createdAt).toLocaleDateString()}</small>
             <p>Preço: R${card.price.toFixed(2)}</p>
+            <small>Criação: {new Date(card.createdAt).toLocaleDateString()}</small>
             <p>Disponível: {card.isAvailable ? 'Sim' : 'Não'}</p>
+            <div className="buttonContainer">
             <button onClick={() => handleEditClick(card.id)}>Editar</button>
             <button onClick={() => handleDelete(card.id)}>Excluir</button>
-          </li>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
 
 export default ArtCardList;
-
-
-
-
-
-
-

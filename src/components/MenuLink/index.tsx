@@ -24,3 +24,5 @@ export default function MenuLink({ children, to }: MenuLinkProps) {
     </Link>
   );
 }
+
+

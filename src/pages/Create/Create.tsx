@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './create.module.css'; // Importe o módulo CSS
+import styles from './create.module.css'; 
 
 const Criar: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -38,7 +38,7 @@ const Criar: React.FC = () => {
           placeholder="Título"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className={styles.input} // Adiciona a classe de input
+          className={styles.input} 
           required
         />
         <input
@@ -46,7 +46,7 @@ const Criar: React.FC = () => {
           placeholder="Descrição"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className={styles.input} // Adiciona a classe de input
+          className={styles.input} 
           required
         />
         <input
@@ -54,10 +54,10 @@ const Criar: React.FC = () => {
           placeholder="Preço"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          className={styles.input} // Adiciona a classe de input
+          className={styles.input} 
           required
         />
-        <button type="submit" className={styles.button}>Criar</button> {/* Adiciona a classe de botão */}
+        <button type="submit" className={styles.button}>Criar</button> 
       </form>
     </div>
   );
