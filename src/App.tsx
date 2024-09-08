@@ -15,6 +15,7 @@ function App() {
             <Route path="/" element={<ArtCardList />} />
             <Route path="/criar" element={<Criar />} />
             <Route path="/atualizar/:id" element={<Atualizar />} />
+            {/* <Route path="/galeria" element={<Galeria />} /> */}
             <Route path="*" element={<div>Página não encontrada</div>}/>
           </Routes>
   

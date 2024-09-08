@@ -1,25 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Input = styled.input`
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 16px;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-`;
+import styles from './create.module.css'; // Importe o módulo CSS
 
 const Criar: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -49,33 +30,36 @@ const Criar: React.FC = () => {
   };
 
   return (
-    <FormContainer>
+    <div className={styles.formContainer}>
       <h2>Criar Novo Card de Arte</h2>
       <form onSubmit={handleSubmit}>
-        <Input
+        <input
           type="text"
           placeholder="Título"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className={styles.input} // Adiciona a classe de input
           required
         />
-        <Input
+        <input
           type="text"
           placeholder="Descrição"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          className={styles.input} // Adiciona a classe de input
           required
         />
-        <Input
+        <input
           type="number"
           placeholder="Preço"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
+          className={styles.input} // Adiciona a classe de input
           required
         />
-        <Button type="submit">Criar</Button>
+        <button type="submit" className={styles.button}>Criar</button> {/* Adiciona a classe de botão */}
       </form>
-    </FormContainer>
+    </div>
   );
 };
 

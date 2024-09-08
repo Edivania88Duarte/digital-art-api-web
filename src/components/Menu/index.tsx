@@ -1,10 +1,9 @@
-import { Link, useLocation } from 'react-router-dom'
-import styles from './menu.module.css'
+import { Link, useLocation } from 'react-router-dom';
+import styles from './menu.module.css';
 import MenuLink from '../MenuLink';
+import React from 'react';
 
 export default function Menu() {
-   
-  
     return (
         <header>
             <nav className={styles.navegacao}>
@@ -14,14 +13,12 @@ export default function Menu() {
 
                <MenuLink to="/criar"> 
                 Criar 
-                </MenuLink>
+               </MenuLink>
                
-                {/* <MenuLink to="/atualizar"> 
-                Atualizar 
-                </MenuLink> */}
-
-
+               <MenuLink to="/galeria"> 
+                Galeria 
+               </MenuLink>
             </nav>
         </header>
-    )
+    );
 }

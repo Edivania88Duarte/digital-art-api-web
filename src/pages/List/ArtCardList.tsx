@@ -69,7 +69,7 @@ const ArtCardList: React.FC = () => {
   return (
     <div>
       <h1>Arte Di Maria</h1>
-      <ul>
+      <ul className='card-container'>
         {artCards.map(card => (
           <li key={card.id} className={styles.card}>
             <h2>{card.title}</h2>

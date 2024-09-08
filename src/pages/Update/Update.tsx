@@ -1,25 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Input = styled.input`
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 16px;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-`;
+import styles from './update.module.css';
 
 function Atualizar() {
   const { id } = useParams<{ id: string }>();
@@ -91,39 +72,46 @@ function Atualizar() {
   }
 
   return (
-    <FormContainer>
+    <div className={styles.formContainer}>
       <h2>Atualizar Card de Arte</h2>
       <form onSubmit={handleSubmit}>
-        <Input
+        <input
+          className={styles.inputField}
           type="text"
           placeholder="Título"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
-        <Input
+        <input
+          className={styles.inputField}
           type="text"
           placeholder="Descrição"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
-        <Input
+        <input
+          className={styles.inputField}
           type="number"
           placeholder="Preço"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           required
         />
-        <Input
-          type="checkbox"
-          checked={isAvailable}
-          onChange={(e) => setIsAvailable(e.target.checked)}
-        />
-        Disponível
-        <Button type="submit">Atualizar</Button>
+        
+        <div className={styles.checkboxContainer}>
+          <input
+            type="checkbox"
+            checked={isAvailable}
+            onChange={(e) => setIsAvailable(e.target.checked)}
+          />
+          <label className={styles.checkboxLabel}>Disponível</label>
+        </div>
+        
+        <button className={styles.buttonAtualizar} type="submit">Atualizar</button>
       </form>
-    </FormContainer>
+    </div>
   );
 }
 
