@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './update.module.css';
 
-function Atualizar() {
+function Update() {
   const { id } = useParams<{ id: string }>();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -115,4 +115,4 @@ function Atualizar() {
   );
 }
 
-export default Atualizar;
+export default Update;

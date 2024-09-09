@@ -6,4 +6,7 @@
 
 .linkDestacado {
     text-decoration: underline;
+    background-color: rgb(244, 244, 209);
+    border: 1px solid rgb(215, 179, 80);
+    border-radius: 5px;    
 }

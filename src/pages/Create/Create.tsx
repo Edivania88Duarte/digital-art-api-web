@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './create.module.css'; 
+import styles from './create.module.css';
 
-const Criar: React.FC = () => {
+const Create: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');  
+  const [price, setPrice] = useState('');
+  const [isAvailable, setIsAvailable] = useState(false); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -15,9 +16,10 @@ const Criar: React.FC = () => {
       title,
       description,
       price: parseFloat(price),
+      isAvailable, 
     };
 
-    // Fazendo a requisição para criar o novo card
+    // Faz a requisição para criar o novo card
     await fetch('http://localhost:3000/art-cards', {
       method: 'POST',
       headers: {
@@ -26,7 +28,7 @@ const Criar: React.FC = () => {
       body: JSON.stringify(newArtCard),
     });
 
-    navigate('/'); // Redireciona para a página de listagem após criar o item
+    navigate('/'); // Redireciona para a página de listagem após criar o card de arte
   };
 
   return (
@@ -38,7 +40,7 @@ const Criar: React.FC = () => {
           placeholder="Título"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className={styles.input} 
+          className={styles.input}
           required
         />
         <input
@@ -46,7 +48,7 @@ const Criar: React.FC = () => {
           placeholder="Descrição"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className={styles.input} 
+          className={styles.input}
           required
         />
         <input
@@ -54,13 +56,23 @@ const Criar: React.FC = () => {
           placeholder="Preço"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          className={styles.input} 
+          className={styles.input}
           required
         />
-        <button type="submit" className={styles.button}>Criar</button> 
+
+        <div className={styles.checkboxContainer}>
+          <input
+            type="checkbox"
+            checked={isAvailable}
+            onChange={(e) => setIsAvailable(e.target.checked)}
+          />
+          <label className={styles.checkboxLabel}>Disponível</label>
+        </div>
+
+        <button type="submit" className={styles.button}>Criar</button>
       </form>
     </div>
   );
 };
 
-export default Criar;
+export default Create;
