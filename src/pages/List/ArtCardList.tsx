@@ -1,62 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import useArtCardList from '../../hooks/useArtCardList';
 import styles from './artCardList.module.css';
-import { useNavigate } from 'react-router-dom';
-
-interface ArtCard {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  createdAt: Date;
-  isAvailable: boolean;
-}
 
 const ArtCardList: React.FC = () => {
-  const [artCards, setArtCards] = useState<ArtCard[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch('http://localhost:3000/art-cards')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Erro ao buscar os dados');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setArtCards(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
-
-  // Função para excluir um card
-  const handleDelete = async (id: number) => {
-    try {
-      const response = await fetch(`http://localhost:3000/art-cards/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        throw new Error('Erro ao excluir o card');
-      }
-
-      // Remover o card do estado local
-      setArtCards(prevCards => prevCards.filter(card => card.id !== id));
-    } catch (err) {
-      setError('Erro ao excluir o card');
-    }
-  };
-
-  // Função para lidar com o clique de "Editar"
-  const handleEditClick = (id: number) => {
-    navigate(`/atualizar/${id}`); // Passa o ID do card para a URL
-  };
+  const { artCards, loading, error, handleDelete, handleEditClick } = useArtCardList();
 
   if (loading) {
     return <p>Carregando...</p>;
@@ -78,8 +25,8 @@ const ArtCardList: React.FC = () => {
             <small>Criação: {new Date(card.createdAt).toLocaleDateString()}</small>
             <p>Disponível: {card.isAvailable ? 'Sim' : 'Não'}</p>
             <div className="buttonContainer">
-            <button onClick={() => handleEditClick(card.id)}>Editar</button>
-            <button onClick={() => handleDelete(card.id)}>Excluir</button>
+              <button onClick={() => handleEditClick(card.id)}>Editar</button>
+              <button onClick={() => handleDelete(card.id)}>Excluir</button>
             </div>
           </div>
         ))}

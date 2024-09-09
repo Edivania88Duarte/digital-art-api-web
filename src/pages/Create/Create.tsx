@@ -1,35 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import useCreateArtCard from '../../hooks/useCreateArtCard';
 import styles from './create.module.css';
 
 const Create: React.FC = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [isAvailable, setIsAvailable] = useState(false); 
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const newArtCard = {
-      title,
-      description,
-      price: parseFloat(price),
-      isAvailable, 
-    };
-
-    // Faz a requisição para criar o novo card
-    await fetch('http://localhost:3000/art-cards', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newArtCard),
-    });
-
-    navigate('/'); // Redireciona para a página de listagem após criar o card de arte
-  };
+  const {
+    title, setTitle,
+    description, setDescription,
+    price, setPrice,
+    isAvailable, setIsAvailable,
+    createdAt, setCreatedAt,
+    handleSubmit,
+  } = useCreateArtCard();
 
   return (
     <div className={styles.formContainer}>
@@ -60,6 +41,14 @@ const Create: React.FC = () => {
           required
         />
 
+        <input
+          type="date"
+          value={createdAt} 
+          onChange={(e) => setCreatedAt(e.target.value)}
+          className={styles.input}
+          required
+        />
+
         <div className={styles.checkboxContainer}>
           <input
             type="checkbox"
@@ -76,3 +65,4 @@ const Create: React.FC = () => {
 };
 
 export default Create;
+  

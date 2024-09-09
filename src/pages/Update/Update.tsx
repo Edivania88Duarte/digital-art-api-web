@@ -1,67 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from 'react';
+import useUpdateArtCard from '../../hooks/useUpdateArtCard';
 import styles from './update.module.css';
 
-function Update() {
-  const { id } = useParams<{ id: string }>();
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState<number | string>(0);
-  const [isAvailable, setIsAvailable] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchArtCard = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/art-cards/${Number(id)}`);
-        if (!response.ok) {
-          throw new Error('Erro ao buscar o card');
-        }
-        const data = await response.json();
-        setTitle(data.title);
-        setDescription(data.description);
-        setPrice(data.price);
-        setIsAvailable(data.isAvailable);
-      } catch (err) {
-        setError('Erro ao atualizar card de arte');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchArtCard();
-  }, [id]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const updatedArtCard = {
-      title,
-      description,
-      price: Number(price),
-      isAvailable,
-    };
-
-    try {
-      const response = await fetch(`http://localhost:3000/art-cards/${Number(id)}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedArtCard),
-      });
-
-      if (!response.ok) {
-        throw new Error('Erro ao atualizar o card');
-      }
-
-      navigate('/');
-    } catch (err) {
-      setError(error);
-    }
-  };
+const Update: React.FC = () => {
+  const {
+    title, setTitle,
+    description, setDescription,
+    price, setPrice,
+    createdAt, setCreatedAt,
+    isAvailable, setIsAvailable,
+    loading,
+    error,
+    handleSubmit,
+  } = useUpdateArtCard();
 
   if (loading) {
     return <p>Carregando...</p>;
@@ -99,7 +50,16 @@ function Update() {
           onChange={(e) => setPrice(e.target.value)}
           required
         />
-        
+
+        {/* Campo de data */}
+        <input
+          className={styles.inputField}
+          type="date"
+          value={createdAt.split('/').reverse().join('-')} // Formato DD/MM/YYYY para YYYY-MM-DD no input de data
+          onChange={(e) => setCreatedAt(e.target.value)}
+          required
+        />
+
         <div className={styles.checkboxContainer}>
           <input
             type="checkbox"
@@ -113,6 +73,6 @@ function Update() {
       </form>
     </div>
   );
-}
+};
 
 export default Update;
