@@ -4,20 +4,23 @@ import styles from '../../components/GalleryArt/gallery.module.css';
 
 
 import cardArt1 from '/src/assets/digital-art-1.png';
-import cardArt2 from '/src/assets/interior-design-1.png';
+import cardArt2 from '/src/assets/artesDigitais03.png';
 import cardArt3 from '/src/assets/artesDigitais04.png';
 import cardArt4 from '/src/assets/artesDigitais02.png';
-import cardArt5 from '/src/assets/artesDigitais03.png';
-import cardArt6 from '/src/assets/lettering-1.png';
-import cardArt7 from '/src/assets/artesDigitais05.png';
+import cardArt5 from '/src/assets/desingInteriores04.png'; 
+import cardArt6 from '/src/assets/arteDesignInterior02.jpg'; 
+import cardArt7 from '/src/assets/artesDigitais05.png'; 
 import cardArt8 from '/src/assets/desingInteriores02.png';
 import cardArt9 from '/src/assets/desingInteriores03.png';
-import cardArt10 from '/src/assets/desingInteriores04.png';
-import cardArt11 from '/src/assets/desingInteriores05.png';
-import cardArt12 from '/src/assets/lettering02.png';
-import cardArt13 from '/src/assets/lettering03.png';
-import cardArt14 from '/src/assets/artesDigitais01.png';
+import cardArt10 from '/src/assets/desingInteriores05.png';
+import cardArt11 from '/src/assets/artesDigitais01.png';
+import cardArt12 from '/src/assets/arteDesignInterior01.jpg';
+import cardArt13 from '/src/assets/lettering02.png';
+import cardArt14 from '/src/assets/lettering-1.png';
 import cardArt15 from '/src/assets/lettering05.png';
+// import cardArt16 from '/src/assets/arteLettering01.jpg';
+// import cardArt17 from '/src/assets/arteLettering02.jpg';
+// import cardArt18 from '/src/assets/arteLettering03.jpg';
 
 
 const Gallery: React.FC = () => {
@@ -38,6 +41,9 @@ const Gallery: React.FC = () => {
         { src: cardArt13, alt: 'arte 13' },
         { src: cardArt14, alt: 'arte 14' },
         { src: cardArt15, alt: 'arte 15' },
+        // { src: cardArt16, alt: 'arte 16' },
+        // { src: cardArt17, alt: 'arte 17' },
+        // { src: cardArt18, alt: 'arte18' }
         
     ];
 

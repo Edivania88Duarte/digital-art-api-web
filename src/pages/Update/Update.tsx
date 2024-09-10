@@ -1,4 +1,3 @@
-// pages/Update.tsx
 import React from 'react';
 import useUpdateArtCard from '../../hooks/useUpdateArtCard';
 import ArtForm from '../../components/ArtCardForm/ArtCardForm';
