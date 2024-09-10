@@ -1,22 +1,24 @@
 import React from 'react';
-import styles from './create.module.css'; // Caminho correto para o arquivo CSS
+import styles from './form.module.css';
 
-interface ArtCardFormProps {
+interface ArtFormProps {
   title: string;
   setTitle: (value: string) => void;
   description: string;
   setDescription: (value: string) => void;
   price: number | string;
   setPrice: (value: string) => void;
-  createdAt: string;
+  createdAt: string; // formato: YYYY-MM-DD
   setCreatedAt: (value: string) => void;
   isAvailable: boolean;
   setIsAvailable: (value: boolean) => void;
-  handleSubmit: (e: React.FormEvent) => void;
-  buttonText: string;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  buttonLabel: string;
+  loading?: boolean;
+  error?: string | null;
 }
 
-const ArtCardForm: React.FC<ArtCardFormProps> = ({
+const ArtForm: React.FC<ArtFormProps> = ({
   title,
   setTitle,
   description,
@@ -28,54 +30,69 @@ const ArtCardForm: React.FC<ArtCardFormProps> = ({
   isAvailable,
   setIsAvailable,
   handleSubmit,
-  buttonText,
+  buttonLabel,
+  loading = false,
+  error = null,
 }) => {
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
+
+  if (error) {
+    return <p>Erro: {error}</p>;
+  }
+
+  // Converte a data para formato (YYYY-MM-DD)
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCreatedAt(e.target.value);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className={styles.formContainer}>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Título"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Descrição"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
-      />
-      <input
-        className={styles.input}
-        type="number"
-        placeholder="Preço"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        required
-      />
-      <input
-        className={styles.input}
-        type="date"
-        value={createdAt}
-        onChange={(e) => setCreatedAt(e.target.value)}
-        required
-      />
-      <div className={styles.checkboxContainer}>
+    <div className={styles.formContainer}>
+      <form onSubmit={handleSubmit}>
         <input
-          type="checkbox"
-          checked={isAvailable}
-          onChange={(e) => setIsAvailable(e.target.checked)}
+          className={styles.input}
+          type="text"
+          placeholder="Título"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
         />
-        <label className={styles.checkboxLabel}>Disponível</label>
-      </div>
-      <button type="submit" className={styles.button}>
-        {buttonText}
-      </button>
-    </form>
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="Descrição"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+        <input
+          className={styles.input}
+          type="number"
+          placeholder="Preço"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          required
+        />
+        <input
+          className={styles.input}
+          type="date"
+          value={createdAt} 
+          onChange={handleDateChange}
+          required
+        />
+        <div className={styles.checkboxContainer}>
+          <input
+            type="checkbox"
+            checked={isAvailable}
+            onChange={(e) => setIsAvailable(e.target.checked)}
+          />
+          <label className={styles.checkboxLabel}>Disponível</label>
+        </div>
+        <button className={styles.button} type="submit">{buttonLabel}</button>
+      </form>
+    </div>
   );
 };
 
-export default ArtCardForm;
+export default ArtForm;
