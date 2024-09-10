@@ -43,7 +43,7 @@ const useUpdateArtCard = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Convertendo a data do formato brasileiro (DD/MM/YYYY) para ISO (YYYY-MM-DD) antes de enviar ao backend
+    // Convertendo a data do formato (DD/MM/YYYY) para ISO (YYYY-MM-DD) antes de enviar ao backend
     const dateParts = createdAt.split('/');
     const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
 

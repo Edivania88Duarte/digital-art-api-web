@@ -21,7 +21,10 @@ const ArtCardList: React.FC = () => {
           <div key={card.id} className={styles.card}>
             <h2>{card.title}</h2>
             <p>{card.description}</p>
-            <p>Preço: R${card.price.toFixed(2)}</p>
+            <p>Preço: {new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format(card.price)}</p>
             <small>Criação: {new Date(card.createdAt).toLocaleDateString()}</small>
             <p>Disponível: {card.isAvailable ? 'Sim' : 'Não'}</p>
             <div className="buttonContainer">
