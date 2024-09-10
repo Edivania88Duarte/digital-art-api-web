@@ -17,7 +17,6 @@ export default function MenuLink({ children, to }: MenuLinkProps) {
       className={`
             ${styles.link}
             ${localizacao.pathname === to ? styles.linkDestacado : ""}
-            console.log('Localização:', localizacao.pathname);
         `}
       to={to}
     >

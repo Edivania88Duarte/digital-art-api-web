@@ -1,27 +1,33 @@
 .galleryContainer {
-    padding: 20px;
-    text-align: center;
-  }
+  padding: 20px;
+  text-align: center;
+}
+
+.gallery {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 5 cards por linha */
+  gap: 20px;
+  justify-items: center;
+}
+
+.galleryItem {
+  width: 100%;
+  max-width: 300px; /* Define um tamanho máximo consistente para os cards */
+  height: 300px; /* Define uma altura consistente para os cards */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Esconde partes da imagem que saem do card */
+  background-color: #f0f0f0; /* Cor de fundo dos cards */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   
-  .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-  }
-  
-  .galleryItem {
-    flex: 1 1 200px;
-    max-width: 300px;
-  }
-  
-  .image {
-    margin-top: 30px;
-    padding: 100px;
-    width: 20%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Corta a imagem para preencher o card sem distorcer */
+  border-radius: 8px;
+}

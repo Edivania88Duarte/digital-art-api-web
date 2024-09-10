@@ -8,8 +8,8 @@ interface GalleryArtProps {
 
 const GalleryArt: React.FC<GalleryArtProps> = ({src, alt}) => {
     return (
-        <div className={styles.image}>
-            <img />
+        <div className={styles.galleryItem}>
+            <img src={src} alt={alt} className={styles.image}/>
         </div>
     );
 };

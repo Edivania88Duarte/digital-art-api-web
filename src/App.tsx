@@ -5,10 +5,6 @@ import Menu from './components/Menu';
 import Create from './pages/Create/Create';
 import Update from './pages/Update/Update';
 import Gallery from './pages/Gallery/Gallery';
-import styles from '../styles/gallery.module.css';
-
-
-
 
 
 function App() {
